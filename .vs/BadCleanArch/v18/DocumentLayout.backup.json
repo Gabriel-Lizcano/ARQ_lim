@@ -46,8 +46,7 @@
               "RelativeToolTip": "src\\Application\\UseCases\\CreateOrder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T21:00:07.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T21:00:07.35Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "src\\Domain\\Services\\OrderService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T20:56:47.529Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T20:56:47.529Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "src\\Domain\\Entities\\Order.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T20:54:57.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T20:54:57.362Z"
             },
             {
               "$type": "Document",
@@ -83,7 +80,7 @@
               "RelativeDocumentMoniker": "src\\WebApi\\Program.cs",
               "ToolTip": "C:\\Users\\gabri\\Downloads\\ARQ_lim\\ARQ_lim\\src\\WebApi\\Program.cs",
               "RelativeToolTip": "src\\WebApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-12T20:47:03.26Z",
               "EditorCaption": ""
@@ -98,8 +95,7 @@
               "RelativeToolTip": "src\\Infrastructure\\Data\\BadDb.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T20:40:22.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T20:40:22.641Z"
             }
           ]
         }
