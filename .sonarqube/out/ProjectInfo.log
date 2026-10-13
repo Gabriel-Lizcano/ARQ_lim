@@ -1,0 +1,28 @@
+Product projects
+---------------------------------------
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Domain\Domain.csproj
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Application\Application.csproj
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Infrastructure\Infrastructure.csproj
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\WebApi\WebApi.csproj
+
+
+Test projects
+---------------------------------------
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\tests\Application.UnitTests\Application.UnitTests.csproj
+
+
+Invalid projects
+---------------------------------------
+{none}
+
+
+Skipped projects
+---------------------------------------
+{none}
+
+
+Excluded projects
+---------------------------------------
+{none}
+
+

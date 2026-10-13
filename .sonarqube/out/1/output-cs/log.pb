@@ -1,0 +1,1 @@
+Roslyn version: 5.9.0.0Language version: CSharp12!Concurrent execution: enabled{File 'C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs' was recognized as generated˜“File 'C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Domain\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs' was recognized as generated

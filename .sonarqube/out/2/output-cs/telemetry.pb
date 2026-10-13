@@ -1,0 +1,1 @@
+URHC:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Application\Application.csprojòCSharp12

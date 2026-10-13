@@ -1,0 +1,2 @@
+﻿C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Infrastructure\Data\BadDb.cs
+C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Infrastructure\Logging\Logger.cs

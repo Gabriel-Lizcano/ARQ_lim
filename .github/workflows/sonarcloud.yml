@@ -1,22 +1,22 @@
-name: Build and Analyze SonarCloud
+name: Construir y analizar SonarCloud
 
 on:
   push:
     branches:
-      - main
+      - main  # (o 'master', según el nombre real de tu rama principal)
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:
-    name: Build, Test and Analyze
-    runs-on: windows-latest # Recomendado para .NET en GitHub Actions
+    name: Construir, probar y analizar
+    runs-on: windows-latest
 
     steps:
-      - name: Set up JDK 17
+      - name: Configurar JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: 17
+          java-version: '17'
           distribution: 'zulu'
 
       - name: Checkout repository
@@ -24,38 +24,38 @@ jobs:
         with:
           fetch-depth: 0 # Necesario para que SonarCloud analice el historial de commits
 
-      - name: Setup .NET Core
+      - name: Configuración de .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install SonarCloud scanner
+      - name: Instalar el escáner SonarCloud
         run: |
           dotnet tool install --global dotnet-sonarscanner
 
-      - name: Restore dependencies
+      - name: Restaurar dependencias
         run: dotnet restore
 
       # 1. Iniciar el escáner de SonarCloud antes de compilar
-      - name: Begin SonarCloud Analysis
+      - name: Iniciar análisis de SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet sonarscanner begin /k:"gabriel-lizcano_arq-lim" /o:"gabriel-lizcano" /d:sonar.host.url="https://sonarcloud.io"/d:sonar.token="626bf885f317b73ab428b06038f8adf5dd2ce4d5"/d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          dotnet sonarscanner begin /k:"gabriel-lizcano_arq-lim" /o:"gabriel-lizcano" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
 
       # 2. Compilar el proyecto
-      - name: Build Solution
+      - name: Construir solución
         run: dotnet build --no-restore
 
-      # 3. Ejecutar las pruebas unitarias y generar el reporte de cobertura con Coverlet
-      - name: Run Tests and Generate Coverage
+      # 3. Ejecutar las pruebas unitarias y generar el informe de cobertura
+      - name: Ejecuta pruebas y genera cobertura
         run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./coverage/
 
-      # 4. Finalizar el escáner y enviar los resultados (incluyendo la cobertura) a SonarCloud
-      - name: End SonarCloud Analysis
+      # 4. Finalizar el escáner y enviar los resultados a SonarCloud
+      - name: Fin del análisis de SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

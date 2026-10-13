@@ -1,0 +1,12 @@
+invocation_expression=2
+file_scoped_namespace_declaration=1
+using_directive=3
+return_statement=1
+local_declaration_statement=1
+class_declaration=1
+method_declaration=1
+blazor=FALSE
+entity_framework_core=FALSE
+model_context_protocol=FALSE
+aspnet_core=FALSE
+aspnet_framework=FALSE

@@ -1,0 +1,26 @@
+®
+6WebApi.Controllers.OrdersController.OrdersController()Z
+PC:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\WebApi\Controllers\OrdersController.cs (!"0*f
+0J
+H
+
+%0void"object.Object()*)'%
+#WebApi.Controllers.OrdersController"
+implicit returnB'%
+#WebApi.Controllers.OrdersControllerHX`„
+/WebApi.Controllers.OrdersController.DoNothing()Z
+PC:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\WebApi\Controllers\OrdersController.cs ("0*
+0 (*
+1*ƒ
+1% (`m
+k
+% (`
+%retstring"__id*I
+% (`=;
+9This controller does nothing. Endpoints are in Program.cs*
+2*+
+2a (a"
+` (a
+
+%retstringB'%
+#WebApi.Controllers.OrdersControllerH

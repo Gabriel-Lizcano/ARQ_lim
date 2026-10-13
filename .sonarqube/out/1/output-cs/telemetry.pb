@@ -1,0 +1,1 @@
+KR>C:\Users\gabri\Videos\ARQ_lim\ARQ_lim\src\Domain\Domain.csprojòCSharp12

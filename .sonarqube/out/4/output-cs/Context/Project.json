@@ -1,0 +1,7 @@
+{
+  "language": "C#",
+  "targetFramework": "net8.0",
+  "assemblyName": "WebApi",
+  "projectType": "Product",
+  "projectPath": "C:\\Users\\gabri\\Videos\\ARQ_lim\\ARQ_lim\\src\\WebApi\\WebApi.csproj"
+}

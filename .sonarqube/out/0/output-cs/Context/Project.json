@@ -1,0 +1,7 @@
+{
+  "language": "C#",
+  "targetFramework": "net10.0",
+  "assemblyName": "Application.UnitTests",
+  "projectType": "Test",
+  "projectPath": "C:\\Users\\gabri\\Videos\\ARQ_lim\\ARQ_lim\\tests\\Application.UnitTests\\Application.UnitTests.csproj"
+}
