@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-// 1. Usamos la librería moderna recomendada por Microsoft
 using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Data;
