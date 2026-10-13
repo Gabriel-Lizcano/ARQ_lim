@@ -1,30 +1,35 @@
 using System;
 using System.Data;
-using System.Data.SqlClient;
+// 1. Usamos la librería moderna recomendada por Microsoft
+using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Data;
 
-using System.Data;
-using System.Data.SqlClient;
-
 public static class BadDb
 {
-    public static string ConnectionString = "Server=localhost;Database=master;User Id=sa;Password=SuperSecret123!;TrustServerCertificate=True";
+    private static readonly string _connectionString =
+        Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+        ?? "Server=localhost;Database=master;Trusted_Connection=True;TrustServerCertificate=True;";
 
-
+    public static string ConnectionString => _connectionString;
     public static int ExecuteNonQueryUnsafe(string sql)
     {
-        var conn = new SqlConnection(ConnectionString);
-        var cmd = new SqlCommand(sql, conn);
+        using var conn = new SqlConnection(_connectionString);
+        using var cmd = new SqlCommand(sql, conn);
+
         conn.Open();
         return cmd.ExecuteNonQuery();
     }
-
-    public static IDataReader ExecuteReaderUnsafe(string sql)
+    public static DataTable ExecuteReaderUnsafe(string sql)
     {
-        var conn = new SqlConnection(ConnectionString);
-        var cmd = new SqlCommand(sql, conn);
+        using var conn = new SqlConnection(_connectionString);
+        using var cmd = new SqlCommand(sql, conn);
+        using var adapter = new SqlDataAdapter(cmd);
+
+        var dataTable = new DataTable();
         conn.Open();
-        return cmd.ExecuteReader();
+        adapter.Fill(dataTable);
+
+        return dataTable;
     }
 }

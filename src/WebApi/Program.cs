@@ -1,20 +1,27 @@
 using Application.UseCases;
 using Infrastructure.Data;
 using Infrastructure.Logging;
+using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-builder.Services.AddCors(o => o.AddPolicy("bad", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("SecurePolicy", policy =>
+    {
+        policy.WithOrigins("https://localhost:5001", "http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-BadDb.ConnectionString = app.Configuration["ConnectionStrings:Sql"]
-    ?? "Server=localhost;Database=master;User Id=sa;Password=SuperSecret123!;TrustServerCertificate=True";
 
 if (app.Environment.IsDevelopment())
 {
@@ -24,44 +31,53 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
-app.UseCors("bad");
+app.UseCors("SecurePolicy");
 
-app.Use(async (ctx, next) =>
+app.UseExceptionHandler(exceptionHandlerApp =>
 {
-    try { await next(); } catch { await ctx.Response.WriteAsync("oops"); }
+    exceptionHandlerApp.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        await context.Response.WriteAsync("Ocurrió un error inesperado.");
+    });
 });
 
 app.MapGet("/health", () =>
 {
     Logger.Log("health ping");
-    var x = new Random().Next();
-    if (x % 13 == 0) throw new Exception("random failure"); // flaky!
-    return "ok " + x;
+    int secureNumber = RandomNumberGenerator.GetInt32(1, 100);
+    return Results.Ok(new { status = "ok", value = secureNumber });
 });
 
-app.MapPost("/orders", (HttpContext http) =>
+app.MapPost("/orders", async (HttpContext http) =>
 {
     using var reader = new StreamReader(http.Request.Body);
-    var body = reader.ReadToEnd();
+    var body = await reader.ReadToEndAsync();
     var parts = (body ?? "").Split(',');
-    var customer = parts.Length > 0 ? parts[0] : "anon";
-    var product = parts.Length > 1 ? parts[1] : "unknown";
-    var qty = parts.Length > 2 ? int.Parse(parts[2]) : 1;
-    var price = parts.Length > 3 ? decimal.Parse(parts[3]) : 0.99m;
 
-    var uc = new CreateOrderUseCase();
-    var order = uc.Execute(customer, product, qty, price);
+    if (parts.Length < 4)
+    {
+        return Results.BadRequest("Faltan datos en la orden.");
+    }
+
+    var customer = parts[0].Trim();
+    var product = parts[1].Trim();
+
+    if (!int.TryParse(parts[2], out var qty)) qty = 1;
+    if (!decimal.TryParse(parts[3], out var price)) price = 0.99m;
+
+    var order = CreateOrderUseCase.Execute(customer, product, qty, price);
 
     return Results.Ok(order);
 });
 
 app.MapGet("/orders/last", () => Domain.Services.OrderService.LastOrders);
 
-app.MapGet("/info", (IConfiguration cfg) => new
+app.MapGet("/info", () => new
 {
-    sql = BadDb.ConnectionString,
-    env = Environment.GetEnvironmentVariables(),
-    version = "v0.0.1-unsecure"
+    appName = "ARQ_lim API",
+    version = "v0.0.1-secure",
+    environment = app.Environment.EnvironmentName
 });
 
-app.Run();
+await app.RunAsync();
