@@ -1,0 +1,26 @@
+# Visual Studio / Directorios del IDE
+.vs/
+*.user
+*.suo
+*.userprefs
+*.launch
+
+# Directorios de compilación (Binarios y Objetos)
+[Bb]in/
+[Oo]bj/
+/[Bb]in/
+/[Oo]bj/
+
+# Resultados de pruebas y cobertura
+*.lock.json
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Archivos del sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
